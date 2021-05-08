@@ -1,5 +1,7 @@
 # My Best Photos
 
+![screenshot](./screenshot.png)
+
 This app shows your uploaded photos and allows to select best 9 photos.  
 
 Once you've selected the photos it will show the photos in the order of your selection.  
