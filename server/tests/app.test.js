@@ -6,16 +6,9 @@ describe('Test application', () => {
   test('smoke test', (done) => {
     request(app)
       .get('/')
+      .expect(200)
       .expect('Content-Type', /json/)
-      .expect(200, '"ok"')
-      .end(done);
-  });
-
-  test('photos api', (done) => {
-    request(app)
-      .get('/photos')
-      .expect('Content-Type', /json/)
-      .expect(200, [])
+      .expect('"ok"')
       .end(done);
   });
 });

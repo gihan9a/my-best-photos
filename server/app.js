@@ -7,6 +7,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const photosRouter = require('./routes/photos');
+const { connect } = require('./db');
 
 const app = express();
 
@@ -34,5 +35,13 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error');
 });
+
+connect()
+  .then(() => {
+    console.log('Database connection established!');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 module.exports = app;
