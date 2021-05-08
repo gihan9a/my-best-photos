@@ -24,7 +24,7 @@ function App() {
     if (
       (!selectedPhotos || selectedPhotos.length === 0) &&
       uploadedPhotos &&
-      uploadedPhotos.length > 0
+      uploadedPhotos.entries.length > 0
     ) {
       setShowUploaded(true);
     }
@@ -48,6 +48,7 @@ function App() {
             onClick={() => {
               changeSelection();
             }}
+            data-test-id="btn-change-selection"
           >
             Change Selection
           </button>

@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "cypress": "^7.2.0",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   },
@@ -42,7 +43,8 @@
     "build": "craco build",
     "eject": "craco eject",
     "start": "craco start",
-    "test": "craco test"
+    "test": "craco test",
+    "test:cypress": "cypress open"
   },
   "version": "0.1.0"
 }

@@ -73,6 +73,7 @@ export default function OrderPhotos({ photos }) {
                 className="p-5 bg-blue-300"
                 onClick={save}
                 disabled={processing}
+                data-test-id="btn-save"
               >
                 {processing ? "Saving..." : "Save"}
               </button>

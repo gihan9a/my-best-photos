@@ -77,6 +77,7 @@ export default function PhotosGridSelectable({ photos }) {
                   onClick={() => {
                     setSelection([]);
                   }}
+                  data-test-id="btn-unselect-all"
                 >
                   Unselect All
                 </button>
@@ -86,6 +87,7 @@ export default function PhotosGridSelectable({ photos }) {
               type="button"
               className="p-5 bg-blue-300"
               onClick={orderNow}
+              data-test-id="btn-order"
             >
               Order
             </button>
