@@ -5,7 +5,6 @@ export default function useUploadedPhotos() {
   const [photos, setPhotos] = useState();
 
   const getPhotos = useCallback(async () => {
-    console.log('uploaded fetching...');
     setLoading(true);
     try {
       const uploaded = await fetch(
@@ -22,7 +21,6 @@ export default function useUploadedPhotos() {
 
   useEffect(() => {
     if (photos === undefined) {
-      console.log('loading..');
       getPhotos();
     }
   }, [photos, getPhotos]);

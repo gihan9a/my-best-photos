@@ -24,9 +24,7 @@ export default function OrderPhotos({ photos }) {
   // update the ordering of the photos after drag end
   const onDragEnd = (event) => {
     const { active, over } = event;
-
-    console.log("drag end", active.id, over.id);
-
+    
     if (active.id !== over.id) {
       setOrderedPhotos((_photos) => {
         const oldIndex = _photos.findIndex((a) => a.id === active.id);

@@ -13,8 +13,6 @@ router.get('/', async (req, res) => {
 /* POST photos entry */
 router.post('/', async (req, res) => {
   const { photos } = req.body;
-  console.log('headers', req.headers);
-  console.log('photos', req.body);
   const best = await add(photos);
   res.json(best);
 });
