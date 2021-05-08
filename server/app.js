@@ -40,9 +40,11 @@ app.use((err, req, res) => {
 
 connect()
   .then(() => {
+    // eslint-disable-next-line no-console
     console.log('Database connection established!');
   })
   .catch((err) => {
+    // eslint-disable-next-line no-console
     console.error(err);
   });
 

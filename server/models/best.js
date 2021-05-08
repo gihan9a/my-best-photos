@@ -27,6 +27,7 @@ bestSchema.statics.getLatest = async function getLatest() {
 
     return photos[0];
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return undefined;
   }
@@ -42,6 +43,7 @@ bestSchema.statics.reset = async function reset() {
     await this.deleteMany({});
     return true;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return false;
   }

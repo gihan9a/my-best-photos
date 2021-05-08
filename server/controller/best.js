@@ -15,6 +15,7 @@ module.exports.getLatest = async () => {
     }
     return respondOK(latest.toObject());
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return respondError('Failed to find the latest');
   }
@@ -34,6 +35,7 @@ module.exports.add = async (photos) => {
     await best.save();
     return respondOK(best.toObject());
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return respondError('Failed to save');
   }
@@ -49,6 +51,7 @@ module.exports.remove = async () => {
     const result = await Best.reset();
     return result ? respondOK() : respondError();
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return respondError('Failed to remove');
   }

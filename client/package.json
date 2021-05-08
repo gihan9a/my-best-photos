@@ -46,8 +46,8 @@
     "build": "craco build",
     "eject": "craco eject",
     "start": "craco start",
-    "test": "craco test",
-    "test:cypress": "cypress open"
+    "test:cypress": "cypress open",
+    "test:eslint": "eslint ."
   },
   "version": "0.1.0"
 }

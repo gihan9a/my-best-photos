@@ -27,6 +27,7 @@
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
     "test": "jest",
+    "test:eslint": "eslint .",
     "test:watch": "jest --watch"
   },
   "version": "0.0.0"
