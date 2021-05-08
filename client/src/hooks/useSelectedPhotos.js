@@ -36,7 +36,7 @@ export default function useSelectedPhotos() {
       try {
         const result = await fetch(process.env.REACT_APP_API_URL + "/photos", {
           method: "POST",
-          mode: 'cors',
+          mode: "cors",
           body: JSON.stringify({ photos }),
           headers: {
             "Content-Type": "application/json",
@@ -45,8 +45,12 @@ export default function useSelectedPhotos() {
 
         if (result.ok) {
           setPhotos(result.data.photos);
+          return true;
         }
-      } catch (err) {}
+        return false;
+      } catch (err) {
+        return false;
+      }
     },
     [setPhotos]
   );

@@ -85,6 +85,7 @@ context("Load the application", () => {
     cy.wait("@allPhotos");
     cy.wait("@uploadedPhotos");
 
+    // eslint-disable-next-line cypress/no-assigning-return-values
     let next = cy.get("img").first().parent();
     for (let i = 0; i < 9; i += 1) {
       next.click();
