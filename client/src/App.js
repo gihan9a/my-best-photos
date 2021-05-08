@@ -7,12 +7,8 @@ import useUploadedPhotos from "./hooks/useUploadedPhotos";
 import useSelectedPhotos from "./hooks/useSelectedPhotos";
 
 function App() {
-  const {
-    photos: uploadedPhotos,
-  } = useUploadedPhotos();
-  const {
-    photos: selectedPhotos,
-  } = useSelectedPhotos();
+  const { photos: uploadedPhotos } = useUploadedPhotos();
+  const { photos: selectedPhotos } = useSelectedPhotos();
 
   const [showSelection, setShowSelection] = useState(false);
   const [showUploaded, setShowUploaded] = useState(false);
@@ -22,7 +18,8 @@ function App() {
       setShowSelection(true);
     }
     if (
-      (!selectedPhotos || selectedPhotos.length === 0) &&
+      selectedPhotos &&
+      selectedPhotos.length === 0 &&
       uploadedPhotos &&
       uploadedPhotos.entries.length > 0
     ) {

@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
@@ -24,7 +25,7 @@ export default function OrderPhotos({ photos }) {
   // update the ordering of the photos after drag end
   const onDragEnd = (event) => {
     const { active, over } = event;
-    
+
     if (active.id !== over.id) {
       setOrderedPhotos((_photos) => {
         const oldIndex = _photos.findIndex((a) => a.id === active.id);
@@ -88,7 +89,7 @@ export default function OrderPhotos({ photos }) {
           <DndContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
             <SortableContext items={orderedPhotos}>
               <div className="grid grid-cols-3 gap-4">
-                {orderedPhotos.map((photo, idx) => (
+                {orderedPhotos.map((photo) => (
                   <SortablePhoto
                     key={photo.id}
                     photo={photo}
@@ -106,3 +107,7 @@ export default function OrderPhotos({ photos }) {
     </div>
   );
 }
+
+OrderPhotos.propTypes = {
+  photos: PropTypes.array.isRequired,
+};

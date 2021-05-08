@@ -30,16 +30,16 @@ context("Load the application", () => {
     cy.wait("@allPhotos");
     cy.wait("@uploadedPhotos");
 
-    // should have change selection button
-    cy.get('[data-test-id="btn-change-selection"').should("exist");
-
     // should have 9 photos
     cy.get("img").should("have.length", 9);
 
-    cy.get('[data-test-id="btn-change-selection"').click();
-    cy.get('[data-test-id="btn-change-selection"').should("not.exist");
-    cy.get('[data-test-id="btn-order"').should("exist");
+    // should have change selection button
+    cy.get('[data-test-id="btn-change-selection"]').should("exist");
+
+    cy.get('[data-test-id="btn-change-selection"]').click();
+    cy.get('[data-test-id="btn-order"]').should("exist");
     cy.get("img").should("have.length", 37);
+    cy.get('[data-test-id="btn-change-selection"]').should("not.exist");
   });
 
   it("should show only uploaded photos", () => {

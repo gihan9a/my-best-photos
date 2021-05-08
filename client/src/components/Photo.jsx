@@ -1,11 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Photo react component
+ *
+ * @param {object} props
+ * @param {object} ref
+ *
+ * @returns
+ */
 function Photo(
-  {
-    photo, onClick = undefined, selected = false, ...props
-  },
-  ref,
+  { photo, onClick = undefined, selected = false, ...props },
+  ref
 ) {
   const clicked = () => {
     if (onClick) {
@@ -18,15 +25,14 @@ function Photo(
   if (onClick !== undefined) {
     attribs = {
       ...attribs,
-      tabIndex: '0',
-      role: 'button',
+      tabIndex: "0",
+      role: "button",
     };
   }
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className={`bg-blue-50 h-60 w-60 ${
-        selected ? 'border-blue-400 border-4' : ''
+        selected ? "border-blue-400 border-4" : ""
       }`}
       ref={ref}
       onClick={clicked}
@@ -41,6 +47,12 @@ function Photo(
     </div>
   );
 }
+
+Photo.propTypes = {
+  photo: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
+  selected: PropTypes.bool,
+};
 
 const PhotoForwardRef = forwardRef(Photo);
 

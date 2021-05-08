@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Photo from './Photo';
 
@@ -10,6 +11,10 @@ function PhotosGrid({ photos }) {
       ))}
     </div>
   );
+}
+
+PhotosGrid.propTypes = {
+  photos: PropTypes.array.isRequired,
 }
 
 export default React.memo(PhotosGrid);

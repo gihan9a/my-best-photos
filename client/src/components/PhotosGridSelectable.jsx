@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState, useCallback } from "react";
+import PropTypes from "prop-types";
 
 import OrderPhotos from "./OrderPhotos";
 import Photo from "./Photo";
@@ -29,6 +31,7 @@ export default function PhotosGridSelectable({ photos }) {
       if (selection[photo.id]) {
         // remove from the selection
         setSelection((state) => {
+          // eslint-disable-next-line no-unused-vars
           const { [photo.id]: _, ...rest } = state;
           return rest;
         });
@@ -107,3 +110,7 @@ export default function PhotosGridSelectable({ photos }) {
     </div>
   );
 }
+
+PhotosGridSelectable.propTypes = {
+  photos: PropTypes.array.isRequired,
+};
