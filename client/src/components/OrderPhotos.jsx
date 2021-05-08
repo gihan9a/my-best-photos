@@ -19,7 +19,7 @@ export default function OrderPhotos({ photos }) {
   const [saved, setSaved] = useState("");
   const [processing, setProcessing] = useState(false);
 
-  const { loading, setBest } = useSelectedPhotos();
+  const { setBest } = useSelectedPhotos();
 
   // update the ordering of the photos after drag end
   const onDragEnd = (event) => {

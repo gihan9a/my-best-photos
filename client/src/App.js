@@ -8,11 +8,9 @@ import useSelectedPhotos from "./hooks/useSelectedPhotos";
 
 function App() {
   const {
-    loading: loadingUploaded,
     photos: uploadedPhotos,
   } = useUploadedPhotos();
   const {
-    loading: loadingSelected,
     photos: selectedPhotos,
   } = useSelectedPhotos();
 
