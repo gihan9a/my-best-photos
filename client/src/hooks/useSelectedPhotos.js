@@ -4,13 +4,16 @@ export default function useSelectedPhotos() {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState();
 
+  /**
+   * Get best photos selection
+   */
   const getPhotos = useCallback(async () => {
     setLoading(true);
     try {
-      const photos = await fetch(
+      const { data } = await fetch(
         process.env.REACT_APP_API_URL + "/photos"
       ).then((res) => res.json());
-      setPhotos(photos);
+      setPhotos(data ? data.photos : []);
     } catch (err) {
       setPhotos([]);
       console.error(err);
@@ -25,5 +28,28 @@ export default function useSelectedPhotos() {
     }
   }, [photos, getPhotos]);
 
-  return { loading, photos };
+  /**
+   * Set best photos
+   */
+  const setBest = useCallback(
+    async (photos) => {
+      try {
+        const result = await fetch(process.env.REACT_APP_API_URL + "/photos", {
+          method: "POST",
+          mode: 'cors',
+          body: JSON.stringify({ photos }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => res.json());
+
+        if (result.ok) {
+          setPhotos(result.data.photos);
+        }
+      } catch (err) {}
+    },
+    [setPhotos]
+  );
+
+  return { loading, photos, setBest };
 }

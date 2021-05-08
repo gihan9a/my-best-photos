@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
-import { DndContext, DragOverlay } from '@dnd-kit/core';
-import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import React, { useState } from "react";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
+import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
-import Photo from './Photo';
-import SortablePhoto from './SortablePhoto';
+import Photo from "./Photo";
+import SortablePhoto from "./SortablePhoto";
+import useSelectedPhotos from "../hooks/useSelectedPhotos";
 
 /**
  * Order Photos component
@@ -15,14 +16,16 @@ import SortablePhoto from './SortablePhoto';
 export default function OrderPhotos({ photos }) {
   const [orderedPhotos, setOrderedPhotos] = useState(photos);
   const [activePhoto, seActivePhoto] = useState(null);
-  const [saved, setSaved] = useState('');
+  const [saved, setSaved] = useState("");
   const [processing, setProcessing] = useState(false);
+
+  const { loading, setBest } = useSelectedPhotos();
 
   // update the ordering of the photos after drag end
   const onDragEnd = (event) => {
     const { active, over } = event;
 
-    console.log('drag end', active.id, over.id);
+    console.log("drag end", active.id, over.id);
 
     if (active.id !== over.id) {
       setOrderedPhotos((_photos) => {
@@ -43,16 +46,13 @@ export default function OrderPhotos({ photos }) {
 
   // persist the order
   const save = async () => {
-    setSaved('');
+    setSaved("");
     setProcessing(true);
     try {
-      await fetch('http://localhost:3000/api/photos', {
-        method: 'post',
-        body: JSON.stringify(orderedPhotos),
-      });
-      setSaved('Saved!');
+      await setBest(orderedPhotos);
+      setSaved("Saved!");
     } catch (err) {
-      setSaved('Error!');
+      setSaved("Error!");
       console.error(err);
     } finally {
       setProcessing(false);
@@ -61,21 +61,31 @@ export default function OrderPhotos({ photos }) {
 
   return (
     <div>
-      <div className="text-center">
-        <p>You can drag the photos to reorder them as you prefer</p>
-        <button
-          type="button"
-          className="p-5 bg-blue-300"
-          onClick={save}
-          disabled={processing}
-        >
-          {processing ? 'Saving...' : 'Save'}
-        </button>
-        <span className="pl-2">{saved}</span>
-        {saved !== '' && <div>Yay!, Refresh this page to view your photos</div>}
+      <div className="text-center p-4">
+        <p className="text-sm text-gray-600">
+          You can drag the photos to reorder them as you prefer
+        </p>
       </div>
-      <div className="min-h-screen flex items-center justify-center">
-        <div>
+      <div className="flex items-center justify-center">
+        <div className="space-y-4">
+          <div className="flex justify-end">
+            <div className="text-right">
+              <button
+                type="button"
+                className="p-5 bg-blue-300"
+                onClick={save}
+                disabled={processing}
+              >
+                {processing ? "Saving..." : "Save"}
+              </button>
+              {saved !== "" && (
+                <>
+                  <span className="pl-2">{saved}</span>
+                  <div>Yay!, Refresh this page to view your photos</div>
+                </>
+              )}
+            </div>
+          </div>
           <DndContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
             <SortableContext items={orderedPhotos}>
               <div className="grid grid-cols-3 gap-4">

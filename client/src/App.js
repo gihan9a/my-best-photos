@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import PhotosGridSelectable from "./components/PhotosGridSelectable";
 import PhotosGrid from "./components/PhotosGrid";
@@ -19,6 +19,19 @@ function App() {
   const [showSelection, setShowSelection] = useState(false);
   const [showUploaded, setShowUploaded] = useState(false);
 
+  useEffect(() => {
+    if (selectedPhotos && selectedPhotos.length > 0) {
+      setShowSelection(true);
+    }
+    if (
+      (!selectedPhotos || selectedPhotos.length === 0) &&
+      uploadedPhotos &&
+      uploadedPhotos.length > 0
+    ) {
+      setShowUploaded(true);
+    }
+  }, [selectedPhotos, uploadedPhotos]);
+
   /**
    * Change selected photos
    */
@@ -27,7 +40,7 @@ function App() {
     setShowUploaded(true);
   };
 
-  if (!loadingSelected && showSelection) {
+  if (showSelection) {
     return (
       <div>
         <div className="space-x-2">
@@ -48,10 +61,7 @@ function App() {
     );
   }
 
-  if (
-    showUploaded ||
-    (selectedPhotos && selectedPhotos.length === 0 && uploadedPhotos)
-  ) {
+  if (showUploaded) {
     return (
       <PhotosGridSelectable
         photos={uploadedPhotos.entries}
